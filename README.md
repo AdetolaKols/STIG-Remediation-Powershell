@@ -39,34 +39,25 @@ The initial scan identified a failed control for STIG ID `WN10-AU-000500`.
 
 📸 **Screenshot – Initial Failed Scan (Scan 1):**  
 
-<img width="1250" alt="Screen Shot 2025-05-06 at 1 07 19 PM" src="https://github.com/user-attachments/assets/adf4275d-5799-42d0-9a7c-55cd15829619" />
+<img width="1478" height="402" alt="WN10-00-000050 failed" src="https://github.com/user-attachments/assets/bbd7af9a-11d3-43c5-bece-818b4bcdd36c" />
 
 ---
 
-### 🔴 Step 2: Confirm Issue Persists with Second Scan
-
-A second scan was run to confirm consistency of the finding before remediation.
-
-📸 **Screenshot – Confirmed Failed STIG (Scan 2):**  
-
-<img width="1250" alt="Screen Shot 2025-05-06 at 3 56 33 PM" src="https://github.com/user-attachments/assets/1ed0214d-4829-4bd6-b374-11f85e7f1f73" />
-
----
-
-### 🧾 Step 3: Manually Remediate via Registry Editor
+### 🧾 Step 2: Manually Remediate via Registry Editor
 
 The registry key `MaxSize` was manually created and set to `32768`.
 
 📸 **Screenshot – Registry Editor (Manual Fix):**  
 
-![Screen Shot 2025-05-06 at 1 01 44 PM](https://github.com/user-attachments/assets/2868f8df-f68d-4bf8-8e58-0c01352431c3)
+<img width="1425" height="740" alt="Registry size verifcation- powershell" src="https://github.com/user-attachments/assets/673a6aed-4de5-44f4-bb99-3faad95b09b1" />
 
 ---
 
-### ✅ Step 4: Run Third Scan to Validate Manual Fix
+### ✅ Step 3: Run Third Scan to Validate Manual Fix
 
 Scan results show that the manual registry change successfully remediated the issue.
 
+![WN10-00-000050 passed ](https://github.com/user-attachments/assets/46dd0a23-de0f-40dc-ad8b-48f5273d8269)
 
 ---
 
@@ -102,20 +93,21 @@ Write-Output "Registry value '$valueName' set to $valueData at $regPath"
 
 📸 Screenshot – Passed After Script Fix (Scan 4):
 
-<img width="1717" alt="Screen Shot 2025-05-06 at 5 28 56 PM" src="https://github.com/user-attachments/assets/61507e62-f0f8-459f-b867-5d947309305e" />
+![WN10-00-000050 passed ](https://github.com/user-attachments/assets/87b99169-766f-48ca-9222-d81583257eeb)
 
 ### 🧠 Reference Page from STIG Viewer
 
 📸 STIG Remediation PowerShell Script & Explanation:
-
+```
 <#
 .SYNOPSIS
-    This PowerShell script ensures that the maximum size of the Windows Application event log is at least 32768 KB (32 MB).
+    This PowerShell script sets the maximum size of the Windows Application event log
+    to at least 32768 KB (32 MB) as per STIG requirement WN10-AU-000500.
 
 .NOTES
     Author          : Adetola Kolawole
-    LinkedIn        : linkedin.com/in/adetola-o-kolawole-4613a8a6/
-    GitHub          : github.com/AdetolaKols
+    LinkedIn        : https://linkedin.com/in/adetola-o-kolawole-4613a8a6/
+    GitHub          : https://github.com/AdetolaKols
     Date Created    : 2025-08-08
     Last Modified   : 2025-08-08
     Version         : 1.0
@@ -130,13 +122,12 @@ Write-Output "Registry value '$valueName' set to $valueData at $regPath"
     PowerShell Ver. : 
 
 .USAGE
-    Put any usage instructions here.
-    Example syntax:
-    PS C:\> .\__remediation_template(STIG-ID-WN10-AU-000500).ps1 
+    Example:
+    PS C:\> .\Remediate-WN10-AU-000500.ps1
 #>
 
-# YOUR CODE GOES HERE# Define registry path and value
-$regPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Event Log\Application"
+# Define registry path and value
+$regPath   = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Event Log\Application"
 $valueName = "Max Size"
 $valueData = 0x8000  # 32768 decimal
 
@@ -148,7 +139,9 @@ if (-not (Test-Path $regPath)) {
 # Set the registry value
 Set-ItemProperty -Path $regPath -Name $valueName -Value $valueData -Type DWord
 
+# Output confirmation
 Write-Output "Registry value '$valueName' set to $valueData at $regPath"
+```
 
 ### 📌 Summary of Remediation Flow
 
