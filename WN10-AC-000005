@@ -1,0 +1,31 @@
+<#
+.SYNOPSIS
+    Checks the Account Lockout Duration setting in Windows 10.
+
+.DESCRIPTION
+    Retrieves the "Account lockout duration" from the local security policy and evaluates it against
+    the requirement: must be at least 15 minutes, or 0 (admin unlock).
+
+.NOTES
+    Author  : Adetola Kolawole
+    Date    : 2025-08-09
+#>
+...
+# Get the current account lockout duration using net accounts
+$lockoutInfo = net accounts | Select-String "Lockout duration"
+$duration = ($lockoutInfo -split ":\s*")[1].Trim() -replace "minutes?", "" -replace "minute", ""
+$duration = [int]$duration
+
+Write-Host "Account Lockout Duration: $duration minutes"
+
+if ($duration -eq 0) {
+    Write-Host "Compliant: Duration is 0 (admin unlock required)."
+}
+elseif ($duration -ge 15) {
+    Write-Host "Compliant: Duration meets or exceeds 15 minutes."
+}
+else {
+    Write-Host "Non-Compliant: Duration is less than 15 minutes."
+}
+...
+
