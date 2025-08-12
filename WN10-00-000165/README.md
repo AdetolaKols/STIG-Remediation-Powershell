@@ -19,6 +19,10 @@ The legacy Server Message Block version 1 (SMBv1) protocol must be disabled.
 - Eliminates risks associated with SMBv1 vulnerabilities
 - Meets compliance requirements (STIG/FIPS)
 
+Inital scan with Tenable shows failed for `WN10-CC-000185`
+
+<img width="1892" height="445" alt="image" src="https://github.com/user-attachments/assets/1c04e4e3-3e45-44f2-9563-302345515420" />
+
 ## USAGE
     Example:
     PS C:\> .\Remediate-WN10-00-000165.ps1
