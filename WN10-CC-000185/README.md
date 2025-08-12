@@ -55,6 +55,10 @@ if ($currentValue -ne $desiredValue) {
     Write-Output "Registry value '$valueName' is already set to $desiredValue."
 }
 ```
+Rescan with Tenable to confirm if the PowerShell fix was successful.
+
+<img width="1891" height="495" alt="image" src="https://github.com/user-attachments/assets/d3d98ab1-f441-4dc5-b6ec-bdd427f615ff" />
+
 ## NOTES
     Author          : Adetola Kolawole
     LinkedIn        : https://linkedin.com/in/adetola-o-kolawole-4613a8a6/
