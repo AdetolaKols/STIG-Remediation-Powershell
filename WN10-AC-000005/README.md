@@ -10,23 +10,6 @@ Checks the **Account Lockout Duration** setting in Windows 10 according to `WN10
 ## DESCRIPTION
  Retrieves the **Account lockout duration** from the local security policy and checks if it is at least 15 minutes or set to 0 (admin unlock).
 
-
-## NOTES
-    Author          : Adetola Kolawole
-    LinkedIn        : https://linkedin.com/in/adetola-o-kolawole-4613a8a6/
-    GitHub          : https://github.com/AdetolaKols
-    Date Created    : 2025-08-09
-    Last Modified   : 2025-08-09
-    Version         : 1.0
-    CVEs            : N/A
-    Plugin IDs      : N/A
-    STIG-ID         : WN10-AC-000005
-
-.TESTED ON
-    Date(s) Tested  : 
-    Tested By       : 
-    Systems Tested  : 
-    PowerShell Ver. : 
     
 ## Correcting the Account Lockout Duration
 
@@ -65,3 +48,14 @@ net accounts /lockoutduration:15
 Rescan with Tenable to confirm if the PowerShell fix was successful.
 
 <img width="1907" height="678" alt="WN10-AC-000005 - Passed" src="https://github.com/user-attachments/assets/78b924ab-c2b2-4f41-a615-c0f054efbe20" />
+
+## NOTES
+    Author          : Adetola Kolawole
+    LinkedIn        : https://linkedin.com/in/adetola-o-kolawole-4613a8a6/
+    GitHub          : https://github.com/AdetolaKols
+    Date Created    : 2025-08-09
+    Last Modified   : 2025-08-09
+    Version         : 1.0
+    CVEs            : N/A
+    Plugin IDs      : N/A
+    STIG-ID         : WN10-AC-000005
