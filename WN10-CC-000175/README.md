@@ -39,7 +39,8 @@ Write-Output "Registry updated: $ValueName set to $ExpectedValue"
 ```
 Rescan with Tenable to confirm if the PowerShell fix was successful.
 
-<img width="1907" height="576" alt="image" src="https://github.com/user-attachments/assets/dd87a9ed-a676-4c7b-9ac0-b622072b61b3" />
+<img width="1862" height="503" alt="image" src="https://github.com/user-attachments/assets/2e7645c7-57de-493a-b422-050acdcb50c2" />
+
 
 
 ```
