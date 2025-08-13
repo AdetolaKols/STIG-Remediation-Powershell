@@ -15,7 +15,7 @@ Inital scan with Tenable shows failed for `WN10-CC-000175`
 
 <img width="1897" height="507" alt="image" src="https://github.com/user-attachments/assets/57cfedd3-3200-4592-a933-905673ea60e4" />
 
-## USAGE
+## Remediation
     Example:
     PS C:\> .\Remediate-`WN10-SO-000255.ps1
 ```
