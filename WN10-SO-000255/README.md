@@ -17,8 +17,8 @@ Inital scan with Tenable shows failed for `WN10-SO-000255`
 <img width="1901" height="437" alt="image" src="https://github.com/user-attachments/assets/c9540993-6509-4af7-9945-ce3fe7032392" />
 
 
-## USAGE
-    Example:
+## Remediation
+    Powershell Script:
     PS C:\> .\Remediate-`WN10-SO-000255.ps1
 ```
 $RegPath = 'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System'
@@ -32,7 +32,8 @@ Write-Output "Registry updated: $ValueName set to $ExpectedValue"
 ```
 Rescan with Tenable to confirm if the PowerShell fix was successful.
 
-<img width="1907" height="576" alt="image" src="https://github.com/user-attachments/assets/dd87a9ed-a676-4c7b-9ac0-b622072b61b3" />
+<img width="1906" height="596" alt="image" src="https://github.com/user-attachments/assets/3996e7c9-b660-4721-bbe4-f8a37470776a" />
+
 
 
 ```
