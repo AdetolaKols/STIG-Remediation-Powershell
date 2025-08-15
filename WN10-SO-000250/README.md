@@ -1,4 +1,4 @@
-# Core Issue: WN10-SO-00025o . This setting configures the elevation requirements for logged on administrators to complete a task 
+# Core Issue: WN10-SO-000250 . This setting configures the elevation requirements for logged on administrators to complete a task 
 
 ## What
 User Account Control must, at minimum, prompt administrators for consent on the secure desktop.
@@ -11,7 +11,7 @@ User Account Control must, at minimum, prompt administrators for consent on the 
 -  Protects against accidental or unauthorized administrative actions.
 -  Reduces the risk of privilege escalation attacks.
 ---
-Inital scan with Tenable shows failed for `N10-SO-000250W`
+Inital scan with Tenable shows failed for `WN10-SO-000250`
 
 <img width="1918" height="617" alt="image" src="https://github.com/user-attachments/assets/91d9af68-ce83-4604-9997-954a994c7a11" />
 
