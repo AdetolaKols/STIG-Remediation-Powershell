@@ -1,4 +1,4 @@
-# Core Issue: WN10-SO-000250 . This setting configures the elevation requirements for logged on administrators to complete a task 
+# Core Issue: WN10-SO-000250 This setting configures the elevation requirements for logged on administrators to complete a task 
 
 ## What
 User Account Control must, at minimum, prompt administrators for consent on the secure desktop.
@@ -26,7 +26,7 @@ Write-Host "ConsentPromptBehaviorAdmin set to 2 successfully."
 ```
 Rescan with Tenable to confirm if the PowerShell fix was successful.
 
-<img width="1862" height="503" alt="image" src="https://github.com/user-attachments/assets/2e7645c7-57de-493a-b422-050acdcb50c2" />
+<img width="1880" height="683" alt="image" src="https://github.com/user-attachments/assets/3bbb40c0-2614-4cf9-afc3-ce2656ffa45b" />
 
 ```
 ## NOTES
