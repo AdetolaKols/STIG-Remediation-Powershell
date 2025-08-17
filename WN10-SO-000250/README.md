@@ -26,7 +26,7 @@ Write-Host "ConsentPromptBehaviorAdmin set to 2 successfully."
 ```
 Rescan with Tenable to confirm if the PowerShell fix was successful.
 
-<img width="1880" height="683" alt="image" src="https://github.com/user-attachments/assets/3bbb40c0-2614-4cf9-afc3-ce2656ffa45b" />
+<img width="1901" height="621" alt="image" src="https://github.com/user-attachments/assets/16dbec2f-83bf-4749-813f-2ba510f7ebf8" />
 
 ```
 ## NOTES
