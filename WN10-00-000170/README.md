@@ -7,7 +7,7 @@ The Server Message Block (SMB) v1 protocol must be disabled on the SMB client.
 - SMBv1 is an old, insecure protocol often targeted by malware like WannaCry.
 - Keeping it enabled exposes your system to remote code execution and ransomware attacks.
 
-## Potential Impact of Denying Automatic Elevation Requests of User Account Control
+## Potential Impact of Disabling Server Message Block (SMB) v1 protocol 
 -  Disabling SMBv1 hardens your system by removing a common attack path.
 -  It ensures your computer uses newer, more secure versions of SMB (SMBv2/SMBv3) for file sharing.
 ---
