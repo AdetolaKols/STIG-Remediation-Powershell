@@ -37,10 +37,7 @@ if ($null -eq $currentValue -or $currentValue -ne $expectedValue) {
 ```
 Rescan with Tenable to confirm if the PowerShell fix was successful.
 
-<img width="1915" height="677" alt="image" src="https://github.com/user-attachments/assets/fb4874a1-0faa-48f6-a19d-96195002dd4a" />
-
-
-
+<img width="1918" height="683" alt="image" src="https://github.com/user-attachments/assets/48a13c51-39c2-43e8-94ba-9cc07d887308" />
 
 ```
 ## NOTES
