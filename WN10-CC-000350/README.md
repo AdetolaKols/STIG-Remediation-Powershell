@@ -45,7 +45,8 @@ else {
 ```
 Rescan with Tenable to confirm if the PowerShell fix was successful.
 
-<img width="1862" height="503" alt="image" src="https://github.com/user-attachments/assets/2e7645c7-57de-493a-b422-050acdcb50c2" />
+<img width="1915" height="677" alt="image" src="https://github.com/user-attachments/assets/fb4874a1-0faa-48f6-a19d-96195002dd4a" />
+
 
 
 
