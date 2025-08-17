@@ -26,9 +26,7 @@ Write-Host "SMBv1 disabled successfully."
 ```
 Rescan with Tenable to confirm if the PowerShell fix was successful.
 
-<img width="1862" height="503" alt="image" src="https://github.com/user-attachments/assets/2e7645c7-57de-493a-b422-050acdcb50c2" />
-
-
+<img width="1918" height="698" alt="image" src="https://github.com/user-attachments/assets/0d8e7905-593a-4bd8-8597-0023b927b259" />
 
 ```
 ## NOTES
