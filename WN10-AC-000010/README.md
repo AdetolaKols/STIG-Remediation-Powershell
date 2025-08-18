@@ -19,35 +19,39 @@ Inital scan with Tenable shows failed for `WN10-AC-000010`
     Example:
     PS C:\> .\Remediate-`WN10-AC-000010'ps1
 ```
-# Fix WN10-AC-000010: Set Account Lockout Threshold to 3
+# Fix WN10-AC-000010: Configure Account Lockout Policy
+secedit /export /cfg "$env:TEMP\secpol.cfg" | Out-Null
+$cfgPath = "$env:TEMP\secpol.cfg"
+$content = Get-Content $cfgPath
 
-try {
-    # Set lockout threshold to 3 attempts
-    secedit /export /cfg "$env:TEMP\secpol.cfg" | Out-Null
-
-    # Apply new setting
-    $cfgPath = "$env:TEMP\secpol.cfg"
-    $content = Get-Content $cfgPath
-
-    # Update LockoutBadCount or add it if missing
-    if ($content -match '^LockoutBadCount') {
-        $content = $content -replace '^LockoutBadCount\s*=\s*\d+', 'LockoutBadCount = 3'
-    } else {
-        $content += 'LockoutBadCount = 3'
-    }
-
-    $content | Set-Content $cfgPath
-
-    # Apply the updated policy
-    secedit /configure /db C:\Windows\Security\Database\secedit.sdb /cfg $cfgPath /areas SECURITYPOLICY
-
-    # Clean up
-    Remove-Item $cfgPath -ErrorAction SilentlyContinue
-
-    Write-Output "Account Lockout Threshold set to 3"
-} catch {
-    Write-Output "Failed to set Account Lockout Threshold"
+# Ensure all related settings are updated
+if ($content -match '^LockoutBadCount') {
+    $content = $content -replace '^LockoutBadCount\s*=\s*\d+', 'LockoutBadCount = 3'
+} else {
+    $content += 'LockoutBadCount = 3'
 }
+
+if ($content -match '^ResetLockoutCount') {
+    $content = $content -replace '^ResetLockoutCount\s*=\s*\d+', 'ResetLockoutCount = 15'
+} else {
+    $content += 'ResetLockoutCount = 15'
+}
+
+if ($content -match '^LockoutDuration') {
+    $content = $content -replace '^LockoutDuration\s*=\s*\d+', 'LockoutDuration = 15'
+} else {
+    $content += 'LockoutDuration = 15'
+}
+
+$content | Set-Content $cfgPath
+
+# Apply the updated policy
+secedit /configure /db C:\Windows\Security\Database\secedit.sdb /cfg $cfgPath /areas SECURITYPOLICY
+
+# Cleanup
+Remove-Item $cfgPath -ErrorAction SilentlyContinue
+
+Write-Output "Account lockout policy configured: Threshold=3, Reset=15, Duration=15"
 
 ```
 Rescan with Tenable to confirm if the PowerShell fix was successful.
