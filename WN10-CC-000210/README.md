@@ -46,9 +46,7 @@ switch ($osBuild) {
 ```
 Rescan with Tenable to confirm if the PowerShell fix was successful.
 
-<img width="1906" height="596" alt="image" src="https://github.com/user-attachments/assets/3996e7c9-b660-4721-bbe4-f8a37470776a" />
-
-
+<img width="1898" height="498" alt="image" src="https://github.com/user-attachments/assets/9c6661b6-659f-4801-8529-382bc60ca8be" />
 
 ```
 ## NOTES
