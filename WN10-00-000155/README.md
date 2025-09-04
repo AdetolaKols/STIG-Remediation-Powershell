@@ -1,4 +1,4 @@
-# Core Issue: WWN10-00-000155 Windows PowerShell 2.0 is currently Enabled
+# Core Issue: WN10-00-000155 Windows PowerShell 2.0 is currently Enabled
 
 | Category            | Key Points                                                                 |
 |---------------------|-----------------------------------------------------------------------------|
