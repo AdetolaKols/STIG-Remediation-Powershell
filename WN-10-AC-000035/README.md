@@ -9,7 +9,7 @@
 ---
 Inital scan with Tenable shows failed for `WN10-AC-000035`
 
-<img width="1911" height="576" alt="image" src="https://github.com/user-attachments/assets/39fa0909-c6c9-4b7e-b8da-eae30f888931" />
+<img width="1897" height="620" alt="image" src="https://github.com/user-attachments/assets/e08c9650-1167-44d7-b2e8-8e4af3181d60" />
 
 ## Remediation
     Powershell Script:
