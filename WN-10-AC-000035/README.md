@@ -42,8 +42,7 @@ Write-Output "Minimum password length has been set to 14 characters. A system re
 ```
 Rescan with Tenable to confirm if the PowerShell fix was successful.
 
-<img width="1906" height="596" alt="image" src="https://github.com/user-attachments/assets/3996e7c9-b660-4721-bbe4-f8a37470776a" />
-
+<img width="1917" height="686" alt="image" src="https://github.com/user-attachments/assets/2c750a74-d923-4367-b6d6-9c3bf05a339a" />
 
 ```
 ## NOTES
