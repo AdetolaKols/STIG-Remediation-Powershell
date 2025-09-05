@@ -46,8 +46,7 @@ Write-Output "Action complete. Restart your system if required."
 ```
 Rescan with Tenable to confirm if the PowerShell fix was successful.
 
-<img width="1906" height="596" alt="image" src="https://github.com/user-attachments/assets/3996e7c9-b660-4721-bbe4-f8a37470776a" />
-
+<img width="1918" height="610" alt="image" src="https://github.com/user-attachments/assets/077ffa17-6527-41c7-ae59-6cff4278f4de" />
 
 
 ```
