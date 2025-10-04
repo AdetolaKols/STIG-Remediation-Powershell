@@ -99,7 +99,7 @@ try {
 ```
 Rescan with Tenable to confirm if the PowerShell fix was successful.
 
-<img width="1917" height="686" alt="image" src="https://github.com/user-attachments/assets/2c750a74-d923-4367-b6d6-9c3bf05a339a" />
+<img width="1495" height="441" alt="image" src="https://github.com/user-attachments/assets/f8a12319-a253-4318-a436-b9fd3dc496d7" />
 
 ```
 ## NOTES
