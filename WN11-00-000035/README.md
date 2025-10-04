@@ -6,7 +6,7 @@
 | **Why**             | - Establishes a deny-by-default, permit-by-exception baseline (incl. packaged apps), shutting down execution from user-writable/unsigned sources and common LOLBins abuse paths.
 |                     | - Converts policy intent into verifiable technical control, aligning with ISO/IEC 27001 (e.g., A.8.7, A.8.9, A.8.16) and UK Cyber Essentials requirements.
 | **Potential Benefits** | - **Material risk reduction:**: fewer malware executions, rogue tools, and shadow IT; tighter blast-radius control across endpoints.
-|                        | - **Audit-ready evidence & smoother ops:**:
+|                        | - **Audit-ready evidence & smoother ops:**
 
 ---
 Inital scan with Tenable shows failed for `WN11-00-000035`
