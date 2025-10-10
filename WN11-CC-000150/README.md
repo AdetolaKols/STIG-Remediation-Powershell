@@ -1,11 +1,10 @@
 # Core Issue: WN11-CC-000150 Enforce encrypted RPC for Remote Desktop Services by setting
 
-| Category            | Key Points                                                                 |
-|---------------------|-----------------------------------------------------------------------------|
-| **What**            | - The Remote Desktop Session Host must require secure RPC communications |
-| **Why**             | - Prevents eavesdropping/MitM on RDP-related RPC traffic (credential and token exposure risks). |
-| **Potential Benefits** | - Risk reduction for lateral movement and RDP exploitation pathways.
-|                        | - Audit-ready evidence (single registry control) for compliance attestation. |
+| Category               | Key Points                                                                                                                                                                                                                                                                                                                                                                                   |
+| ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **WHAT**               | - Enable **Computer Configuration → Administrative Templates → System → Power Management → Sleep Settings → “Require a password when a computer wakes (plugged in)” = Enabled**.<br>- On Windows 11 this sets **`HKLM\SOFTWARE\Policies\Microsoft\Power\PowerSettings\0e796bdb-100d-47d6-a2d5-f7d2daa51f51\ACSettingIndex` (REG_DWORD) = 1**. *(Optional on battery: `DCSettingIndex = 1`.)* |
+| **WHY**                | - Prevents **walk-up/session hijack** after sleep by forcing re-authentication on wake.<br>- Aligns with **DISA STIG** hardening for logon/logoff behavior and supports **ISO/IEC 27001** access control objectives.                                                                                                                                                                         |
+| **POTENTIAL BENEFITS** | - **Risk reduction** for data exposure and account misuse on unattended devices (office, hot-desking, home).<br>- **Audit-ready, low-overhead:** single registry/GPO control, easily verified via `gpresult`, `powercfg /Q`, or registry checks.                                                                                                                                             |
 
 ---
 Inital scan with Tenable shows failed for `WN11-CC-000150`
@@ -17,89 +16,39 @@ Inital scan with Tenable shows failed for `WN11-CC-000150`
     Powershell Script:
     PS C:\> .\Remediate-`WN11-CC-000150.ps1
 ```
-New-Item -Path 'HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services' -Force | Out-Null
-New-ItemProperty -Path 'HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services' -Name 'fEncryptRPCTraffic' -PropertyType DWord -Value 1 -Force | Out-Null
+# Verify GPO-backed policy + (if visible) the active power setting
 
+$regPath = 'HKLM:\SOFTWARE\Policies\Microsoft\Power\PowerSettings\0e796bdb-100d-47d6-a2d5-f7d2daa51f51'
 
-**QUICK CHECK IF IT WORKED
-<# 
-Checks STIG: RDP RPC traffic must be encrypted
-Key:  HKLM\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services
-Name: fEncryptRPCTraffic (REG_DWORD) = 1
-#>
+# 1) Registry policy (authoritative for this GPO setting)
+$ac = (Get-ItemProperty -Path $regPath -ErrorAction SilentlyContinue).ACSettingIndex
+$regOK = ($ac -eq 1)
 
-$regSubPath = 'SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services'
-$valName    = 'fEncryptRPCTraffic'
-$expected   = 1
-
-$report = [pscustomobject]@{
-  Hive      = 'HKLM'
-  Path      = "HKLM:\$regSubPath"
-  Name      = $valName
-  Expected  = $expected
-  Actual    = $null
-  Type      = $null
-  Compliant = $false
-  Reason    = $null
+# 2) Active power plan view (may be overridden/hidden by policy; best-effort check)
+$pc = & powercfg /Q 2>$null
+$block = $pc | Select-String -Pattern '0e796bdb-100d-47d6-a2d5-f7d2daa51f51' -Context 0,8
+$acIdx = $null
+if ($block) {
+  $acLine = $block.Context.PostContext | Where-Object { $_ -match 'Current AC Power Setting Index' } | Select-Object -First 1
+  if ($acLine -and $acLine -match '0x([0-9A-Fa-f]+)') {
+    $acIdx = [Convert]::ToInt32($Matches[1],16)
+  }
 }
+$powercfgOK = ($acIdx -eq 1)
 
-try {
-  # Force 64-bit registry view to avoid Wow6432 redirection on x64
-  $base = [Microsoft.Win32.RegistryKey]::OpenBaseKey(
-            [Microsoft.Win32.RegistryHive]::LocalMachine,
-            [Microsoft.Win32.RegistryView]::Registry64)
-
-  $key = $base.OpenSubKey($regSubPath, $false)
-  if (-not $key) {
-    $report.Reason = 'Registry path not found'
-    $report
-    exit 1
-  }
-
-  $val = $key.GetValue($valName, $null, [Microsoft.Win32.RegistryValueOptions]::DoNotExpandEnvironmentNames)
-  if ($null -eq $val) {
-    $report.Reason = 'Value missing'
-    $report
-    exit 1
-  }
-
-  try { $kind = $key.GetValueKind($valName) } catch { $kind = $null }
-  $report.Type   = if ($kind) { $kind.ToString() } else { 'Unknown' }
-  $report.Actual = try { [int]$val } catch { $val }
-
-  if ($kind -ne [Microsoft.Win32.RegistryValueKind]::DWord) {
-    $report.Reason = 'Wrong value type (expected REG_DWORD)'
-    $report.Compliant = $false
-    $report
-    exit 1
-  }
-
-  if ([int]$val -eq $expected) {
-    $report.Compliant = $true
-    $report.Reason = 'Configured correctly'
-    $report
-    exit 0
-  } else {
-    $report.Compliant = $false
-    $report.Reason = "Wrong value (expected $expected)"
-    $report
-    exit 1
-  }
-
-} catch {
-  $report.Reason = "Error: $($_.Exception.Message)"
-  $report
-  exit 1
-} finally {
-  if ($key)  { $key.Close() }
-  if ($base) { $base.Close() }
-}
-
+# Summary
+[pscustomobject]@{
+  Registry_ACSettingIndex = $ac
+  Registry_OK  = $regOK
+  PowerCfg_ACIndex = $acIdx
+  PowerCfg_OK  = $powercfgOK
+  Overall      = if ($regOK -and ($powercfgOK -or $null -eq $acIdx)) { 'PASS' } else { 'CHECK' }
+} | Format-List
 
 ```
 Rescan with Tenable to confirm if the PowerShell fix was successful.
 
-<img width="1495" height="441" alt="image" src="https://github.com/user-attachments/assets/f8a12319-a253-4318-a436-b9fd3dc496d7" />
+<img width="1507" height="484" alt="image" src="https://github.com/user-attachments/assets/f125983f-94f1-4881-852b-6fe67d0ff1cf" />
 
 ```
 ## NOTES
