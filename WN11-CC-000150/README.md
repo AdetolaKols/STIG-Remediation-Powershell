@@ -7,10 +7,6 @@
 | **POTENTIAL BENEFITS** | - **Risk reduction** for data exposure and account misuse on unattended devices (office, hot-desking, home).<br>- **Audit-ready, low-overhead:** single registry/GPO control, easily verified via `gpresult`, `powercfg /Q`, or registry checks.                                                                                                                                             |
 
 ---
-Inital scan with Tenable shows failed for `WN11-CC-000150`
-
-<img width="1533" height="626" alt="image" src="https://github.com/user-attachments/assets/96de158c-4a15-432c-8168-40982bf5fd36" />
-
 
 ## Remediation
     Powershell Script:
